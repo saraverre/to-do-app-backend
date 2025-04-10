@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\TodoTaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(TodoTaskController::class)->group(function () {
+    Route::get('/todos', 'index');
+    Route::post('/todos', 'store');
+    Route::put('/todos/{id}', 'update');
+    Route::delete('/todos/delete-all', 'deleteAll');
+    Route::delete('/todos/{id}', 'destroy');
 });
